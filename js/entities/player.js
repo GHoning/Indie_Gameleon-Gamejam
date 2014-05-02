@@ -35,7 +35,7 @@ game.player = me.ObjectEntity.extend({
 				game.data.lastSpokenPerson = "Henk";
 			}
 			
-			if (me.input.isKeyPressed("Up") /*&& !this.keylock*/) {
+			if (me.input.isKeyPressed("Up") && !this.keylock) {
 				this.keylock = true;
 				if(this.mapPos.y-1 >= 0 && game.play.collisionMap[this.mapPos.x][this.mapPos.y-1] == null){
 					console.log("Up");
@@ -48,7 +48,7 @@ game.player = me.ObjectEntity.extend({
 				this.vel.y -= this.accel.y * me.timer.tick;*/
 			}
 
-			if (me.input.isKeyPressed("Left") /*&& !this.keylock*/) {
+			if (me.input.isKeyPressed("Left") && !this.keylock) {
 				this.keylock = true;
 				if(this.mapPos.x-1 >= 0 && game.play.collisionMap[this.mapPos.x-1][this.mapPos.y] == null){
 					console.log("Left");
@@ -61,7 +61,7 @@ game.player = me.ObjectEntity.extend({
 				this.vel.y -= this.accel.y * me.timer.tick;*/
 			}
 
-			if (me.input.isKeyPressed("Down") /*&& !this.keylock*/) {
+			if (me.input.isKeyPressed("Down") && !this.keylock) {
 				this.keylock = true;
 				if(this.mapPos.y < 29 && game.play.collisionMap[this.mapPos.x][this.mapPos.y+1] == null){
 					console.log("Down");
@@ -77,7 +77,7 @@ game.player = me.ObjectEntity.extend({
 				this.vel.y += this.accel.y * me.timer.tick;*/
 			}
 
-			if (me.input.isKeyPressed("Right") /*&& !this.keylock*/) {
+			if (me.input.isKeyPressed("Right") && !this.keylock) {
 				this.keylock = true;
 				
 				if(this.mapPos.x < 29 && game.play.collisionMap[this.mapPos.x+1][this.mapPos.y] == null){
@@ -91,9 +91,9 @@ game.player = me.ObjectEntity.extend({
 				this.vel.y += this.accel.y * me.timer.tick;*/
 			}
 			
-			/*if(!me.input.isKeyPressed("Down")&&!me.input.isKeyPressed("Right")&&!me.input.isKeyPressed("Left")&&!me.input.isKeyPressed("Up")){
+			if(!me.input.isKeyPressed("Down")&&!me.input.isKeyPressed("Right")&&!me.input.isKeyPressed("Left")&&!me.input.isKeyPressed("Up")){
 				this.keylock = false;
-			}*/
+			}
 			
 			this.updateMovement();
 			this.parent();
