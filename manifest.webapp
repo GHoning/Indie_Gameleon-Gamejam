@@ -1,0 +1,8 @@
+{
+    "name": "De Lawei",
+    "launch_path" : "./index.html",
+    "version": "1",
+    "developer": {
+        "name": "penguins"
+    }
+}
