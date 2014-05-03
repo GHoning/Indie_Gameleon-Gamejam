@@ -30,65 +30,115 @@ game.player = me.ObjectEntity.extend({
 		
 		update : function () {
 		
-			if (me.input.isKeyPressed("Talk")) {
-				me.state.change(me.state.READY);
-				game.data.lastSpokenPerson = "Henk";
+			if(game.play.collisionMap[this.mapPos.x][this.mapPos.y] != null) {
+				console.log(game.play.collisionMap[this.mapPos.x][this.mapPos.y].tileId);
+				if(game.play.collisionMap[this.mapPos.x][this.mapPos.y].tileId == constants.DEATHPOINT_TILEID){
+					console.log("deathpool " + game.data.deathCounter);
+					game.data.deathCounter += 1;
+					me.levelDirector.reloadLevel();
+				}else if(game.play.collisionMap[this.mapPos.x][this.mapPos.y].tileId == constants.TRIGGER_TILEID && me.input.isKeyPressed("Interact") && game.data.deathCounter > 0) {
+					game.play.loadLevel("test2", this.pos, this.mapPos);
+				}
 			}
 			
 			if (me.input.isKeyPressed("Up") && !this.keylock) {
+				console.log("please "+ this.mapPos);
 				this.keylock = true;
+				console.log(this.mapPos.y-1 >= 0 && game.play.collisionMap[this.mapPos.x][this.mapPos.y-1]);
 				if(this.mapPos.y-1 >= 0 && game.play.collisionMap[this.mapPos.x][this.mapPos.y-1] == null){
+					console.log("Up");
+					this.renderable.setCurrentAnimation("upRight");
+					/*this.pos.x += 128;
+					this.pos.y -= 64;*/
+					this.mapPos.y -= 1;
+					var tween = new me.Tween(this.pos).to({x: this.pos.x + 128, y: this.pos.y -64}, 1000);
+					tween.easing(me.Tween.Easing.Bounce.Out);
+					tween.start();
+				} else if(this.mapPos.y-1 >= 0 && game.play.collisionMap[this.mapPos.x][this.mapPos.y-1].tileId == constants.DEATHPOINT_TILEID){
+					console.log("Up");
+					this.renderable.setCurrentAnimation("upRight");
+					this.pos.x += 128;
+					this.pos.y -= 64;
+					this.mapPos.y -= 1;
+				} else if(this.mapPos.y-1 >= 0 && game.play.collisionMap[this.mapPos.x][this.mapPos.y-1].tileId == constants.TRIGGER_TILEID){
 					console.log("Up");
 					this.renderable.setCurrentAnimation("upRight");
 					this.pos.x += 128;
 					this.pos.y -= 64;
 					this.mapPos.y -= 1;
 				}
-				/*this.vel.x += this.accel.x * me.timer.tick;
-				this.vel.y -= this.accel.y * me.timer.tick;*/
 			}
 
 			if (me.input.isKeyPressed("Left") && !this.keylock) {
 				this.keylock = true;
+				console.log(this.mapPos.x-1 >= 0 && game.play.collisionMap[this.mapPos.x-1][this.mapPos.y]);
 				if(this.mapPos.x-1 >= 0 && game.play.collisionMap[this.mapPos.x-1][this.mapPos.y] == null){
 					console.log("Left");
 					this.renderable.setCurrentAnimation("upLeft");
 					this.pos.x -= 128;
 					this.pos.y -= 64;
 					this.mapPos.x -=1;
+				} else if(this.mapPos.x-1 >= 0 && game.play.collisionMap[this.mapPos.x-1][this.mapPos.y].tileId == constants.DEATHPOINT_TILEID){
+					console.log("Left");
+					this.renderable.setCurrentAnimation("upLeft");
+					this.pos.x -= 128;
+					this.pos.y -= 64;
+					this.mapPos.x -=1;
+				} else if(this.mapPos.x-1 >= 0 && game.play.collisionMap[this.mapPos.x-1][this.mapPos.y].tileId == constants.TRIGGER_TILEID) {
+					console.log("Left");
+					this.renderable.setCurrentAnimation("upLeft");
+					this.pos.x -= 128;
+					this.pos.y -= 64;
+					this.mapPos.x -=1;
 				}
-				/*this.vel.x -= this.accel.x * me.timer.tick;
-				this.vel.y -= this.accel.y * me.timer.tick;*/
 			}
 
 			if (me.input.isKeyPressed("Down") && !this.keylock) {
 				this.keylock = true;
+				console.log(this.mapPos.y < 29 && game.play.collisionMap[this.mapPos.x][this.mapPos.y+1]);
 				if(this.mapPos.y < 29 && game.play.collisionMap[this.mapPos.x][this.mapPos.y+1] == null){
 					console.log("Down");
 					this.renderable.setCurrentAnimation("downLeft");
 					this.pos.x -= 128;
 					this.pos.y += 64;
-					//this.vel.x -= this.accel.x * me.timer.tick;
-					//this.vel.y += this.accel.y * me.timer.tick;
+					this.mapPos.y += 1;
+				} else if(this.mapPos.y < 29 && game.play.collisionMap[this.mapPos.x][this.mapPos.y+1].tileId == constants.DEATHPOINT_TILEID) {
+					console.log("Down");
+					this.renderable.setCurrentAnimation("downLeft");
+					this.pos.x -= 128;
+					this.pos.y += 64;
+					this.mapPos.y += 1;
+				} else if(this.mapPos.y < 29 && game.play.collisionMap[this.mapPos.x][this.mapPos.y+1].tileId == constants.TRIGGER_TILEID) {
+					console.log("Down");
+					this.renderable.setCurrentAnimation("downLeft");
+					this.pos.x -= 128;
+					this.pos.y += 64;
 					this.mapPos.y += 1;
 				}
-			
-				/*this.vel.x -= this.accel.x * me.timer.tick;
-				this.vel.y += this.accel.y * me.timer.tick;*/
 			}
 
 			if (me.input.isKeyPressed("Right") && !this.keylock) {
 				this.keylock = true;
-				
+				console.log(this.mapPos.x < 29 && game.play.collisionMap[this.mapPos.x+1][this.mapPos.y]);
 				if(this.mapPos.x < 29 && game.play.collisionMap[this.mapPos.x+1][this.mapPos.y] == null){
 					console.log("Right");
 					this.renderable.setCurrentAnimation("downRight");
 					this.pos.x += 128;
 					this.pos.y += 64;
 					this.mapPos.x +=1;
+				} else if(this.mapPos.x < 29 && game.play.collisionMap[this.mapPos.x+1][this.mapPos.y].tileId == constants.DEATHPOINT_TILEID) {
+					console.log("Right");
+					this.renderable.setCurrentAnimation("downRight");
+					this.pos.x += 128;
+					this.pos.y += 64;
+					this.mapPos.x +=1;
+				} else if(this.mapPos.x < 29 && game.play.collisionMap[this.mapPos.x+1][this.mapPos.y].tileId == constants.TRIGGER_TILEID) {
+					console.log("Right");
+					this.renderable.setCurrentAnimation("downRight");
+					this.pos.x += 128;
+					this.pos.y += 64;
+					this.mapPos.x +=1;
 				}
-				/*this.vel.x += this.accel.x * me.timer.tick;
-				this.vel.y += this.accel.y * me.timer.tick;*/
 			}
 			
 			if(!me.input.isKeyPressed("Down")&&!me.input.isKeyPressed("Right")&&!me.input.isKeyPressed("Left")&&!me.input.isKeyPressed("Up")){

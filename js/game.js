@@ -7,10 +7,7 @@ var game = {
 	data : {
 		currentLevel: constants.STARTING_LEVEL, 
 		playerPos: constants.PLAYER_STARTLOCATION,
-		currentQuestState : constants.STARTING_QUESTSTATE,
-		lastSpokenPerson : "",
-		inventory : [],
-		questItems : [],
+		deathCounter : 0
 	},
 	
 	/*
@@ -52,6 +49,9 @@ var game = {
 		me.input.bindKey(me.input.KEY.LEFT, "Left");
 		me.input.bindKey(me.input.KEY.DOWN, "Down");
 		me.input.bindKey(me.input.KEY.RIGHT, "Right");
+		
+		me.input.bindKey(me.input.KEY.E, "Interact");
+		me.input.bindKey(me.input.KEY.ENTER, "Interact");
 
 		me.state.change(me.state.PLAY);
 	}
