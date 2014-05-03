@@ -4,17 +4,24 @@
 game.PlayScreen = me.ScreenObject.extend({
 		
 		onResetEvent : function () {
+			console.log("reset");
 			me.levelDirector.loadLevel(game.data.currentLevel);
-			//this.HUD;
-			//this.addHUD();
-			//this.placePlayer(game.data.playerPos);
-			me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).alpha = 0;
+			this.HUD;
+			this.addHUD();
 			me.game.currentLevel.getLayerByName("bridgesAbove").alpha = 0;
 			this.collisionMap = me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).layerData;
-			console.log(me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER));
-			console.log("mapWidth = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth);
-			console.log("mapHeight = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).cols * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tileheight);
-			//this.placePlayer(new me.Vector2d((me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth/2 -64),-128));
+			this.placeGraves();
+			me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).alpha = 0;
+		},
+		
+		placeGraves : function () {
+			for (var i = 0; i < game.data.graves.length; i++){
+				var grave = new game.Grave(game.data.graves[i].x - 60 , game.data.graves[i].y - 120, {image: "Grave",spritewidth: 128, spriteheight:192});
+				me.game.world.addChild(grave, 10000);
+			}
+			
+			var grave = me.game.world.getChildByProp("image","Grave");
+			console.log(grave);
 		},
 		
 		addHUD :  function () {
@@ -35,21 +42,12 @@ game.PlayScreen = me.ScreenObject.extend({
 			me.game.world.removeChild(me.game.world.getChildByName("HUD")[0]);
 		},
 
-		loadLevel : function (lvl, playerPos, collisionPos) {
-			//save player reload collision map
+		loadLevel : function (lvl) {
 			me.levelDirector.loadLevel(lvl);
 			
-			
-			this.placePlayer(playerPos);
-			
-			me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).alpha = 0;
 			this.collisionMap = me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).layerData;
-			console.log(me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER));
-			console.log("mapWidth = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth);
-			console.log("mapHeight = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).cols * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tileheight);
-			
-			var player = me.game.world.getChildByName("player");
-			player[0].mapPos = collisionPos;
-			console.log(player.mapPos + " map Position");
+
+			me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).alpha = 0;
+			this.placeGraves();
 		}
 	});

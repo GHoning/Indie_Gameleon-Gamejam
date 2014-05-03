@@ -7,7 +7,8 @@ var game = {
 	data : {
 		currentLevel: constants.STARTING_LEVEL, 
 		playerPos: constants.PLAYER_STARTLOCATION,
-		deathCounter : 0
+		deathCounter : 0,
+		graves : []
 	},
 	
 	/*
@@ -35,20 +36,21 @@ var game = {
 	 *	Called when loading is finished. Creates all the screen objects en registers objects to their respective entity pool.
 	 */
 	loaded : function () {
-		game.play = new game.PlayScreen();
+		game.play = new game.PlayScreen(true, true);
 		me.state.set(me.state.PLAY, game.play);
 		
 		me.pool.register("player", game.player);
+		me.pool.register("grave", game.Grave);
 
-		me.input.bindKey(me.input.KEY.W, "Up");
-		me.input.bindKey(me.input.KEY.A, "Left");
-		me.input.bindKey(me.input.KEY.S, "Down");
-		me.input.bindKey(me.input.KEY.D, "Right");
+		me.input.bindKey(me.input.KEY.W, "Left");
+		me.input.bindKey(me.input.KEY.A, "Down");
+		me.input.bindKey(me.input.KEY.S, "Right");
+		me.input.bindKey(me.input.KEY.D, "Up");
 
-		me.input.bindKey(me.input.KEY.UP, "Up");
-		me.input.bindKey(me.input.KEY.LEFT, "Left");
-		me.input.bindKey(me.input.KEY.DOWN, "Down");
-		me.input.bindKey(me.input.KEY.RIGHT, "Right");
+		me.input.bindKey(me.input.KEY.UP, "Left");
+		me.input.bindKey(me.input.KEY.LEFT, "Down");
+		me.input.bindKey(me.input.KEY.DOWN, "Right");
+		me.input.bindKey(me.input.KEY.RIGHT, "Up");
 		
 		me.input.bindKey(me.input.KEY.E, "Interact");
 		me.input.bindKey(me.input.KEY.ENTER, "Interact");

@@ -4,11 +4,9 @@ var constants = {
 	"SCREENHEIGHT"			: 768,
 	"ISOCOLL_LAYER"			: "isoColl",
 	"STARTING_LEVEL"		: "test1",
-	"PLAYER_STARTLOCATION"	: new me.Vector2d(57*128,58*64),
-	"COLLISION_TILEID"		: 34,
-	"DEATHPOINT_TILEID"		: 19,
+	"PLAYER_STARTLOCATION"	: new me.Vector2d(0,0),
+	"COLLISION_TILEID"		: 18,
+	"DEATHPOINT_TILEID"		: 21,
 	"TRIGGER_TILEID"		: 20,
 	"TUNNEL_TILEID"			: 30
-	//add tile number collision
-	//add tile number deathpoint
 };
