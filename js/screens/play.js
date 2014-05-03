@@ -7,13 +7,14 @@ game.PlayScreen = me.ScreenObject.extend({
 			me.levelDirector.loadLevel(game.data.currentLevel);
 			//this.HUD;
 			//this.addHUD();
-			this.placePlayer(game.data.playerPos);
+			//this.placePlayer(game.data.playerPos);
 			me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).alpha = 0;
+			me.game.currentLevel.getLayerByName("bridgesAbove").alpha = 0;
 			this.collisionMap = me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).layerData;
 			console.log(me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER));
 			console.log("mapWidth = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth);
 			console.log("mapHeight = " + me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).cols * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tileheight);
-			this.placePlayer(new me.Vector2d((me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth/2 -64),-128));
+			//this.placePlayer(new me.Vector2d((me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).rows * me.game.currentLevel.getLayerByName(constants.ISOCOLL_LAYER).tilewidth/2 -64),-128));
 		},
 		
 		addHUD :  function () {

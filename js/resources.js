@@ -9,28 +9,37 @@ game.resources = [
 		type : "image",
 		src : "data/img/sprite/AlexAnimationSheet.png"
 	}, {
-		// Tilesets
-		name : "metatiles_iso256x256",
+		name : "bridge_solid",
 		type : "image",
-		src : "data/img/tileset/metatiles_iso256x256.png"
+		src : "data/img/tileset/bridge_solid.png"
 	}, {
-		name : "Tileset1",
+		name : "gddset",
 		type : "image",
-		src : "data/img/tileset/Tileset1.png"
+		src : "data/img/tileset/gddset.png"
 	}, {
-		name : "Tileset2",
+		name : "House 1",
 		type : "image",
-		src : "data/img/tileset/Tileset2.png"
+		src : "data/img/tileset/House 1.png"
+	}, {
+		name : "Solid",
+		type : "image",
+		src : "data/img/tileset/Solid.png"
+	}, {
+		name : "Stairset",
+		type : "image",
+		src : "data/img/tileset/Stairset.png"
+	}, {
+		name : "tunnel",
+		type : "image",
+		src : "data/img/tileset/tunnel.png"
+	}, {
+		name : "Tileset",
+		type : "image",
+		src : "data/img/tileset/Tileset.png"
 	}, {
 		name : "font",
 		type : "image",
 		src : "data/img/sprite/32x32_font.png"
-	},
-	//tilesettests :D 
-	{
-		name : "GridTile",
-		type : "image",
-		src : "data/img/tileset/GridTile.png"
 	},
 
 	/* Maps.
@@ -41,7 +50,7 @@ game.resources = [
 	{
 		name : "test1",
 		type : "tmx",
-		src : "data/map/Test1.tmx"
+		src : "data/map/level1_state1.tmx"
 	}, {
 		name : "test2",
 		type : "tmx",
